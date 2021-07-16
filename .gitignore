@@ -13,3 +13,6 @@ __pycache__/
 
 # ignore egg
 src/hdb_resale_data.egg-info/*
+
+# ignore vim
+.vim/*
