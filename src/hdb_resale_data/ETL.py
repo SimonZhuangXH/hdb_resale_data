@@ -1,5 +1,6 @@
 """Extract Load and Transform."""
 import pandas as pd  # dataframe
+import asyncio
 import pickle
 
 from hdb_resale_data import (  # noqa: E402
@@ -85,10 +86,10 @@ def retrive_location(df, first_n: int):
     location = df["block"] + " " + df["street_name"]
     links = loc.url1 + location + loc.url2
     if first_n > 0:
-        responses = loc.get_gresponse(links.iloc[:first_n].values)
+        responses = loc.get_rresponse(links.iloc[:first_n].values)
     else:
-        responses = loc.get_gresponse(links.values)
-    return responses
+        responses = loc.get_rresponse(links.values)
+    return asyncio.run(responses)
 
 
 if __name__ == "__main__":
