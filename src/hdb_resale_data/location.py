@@ -38,10 +38,12 @@ class Location(object):
                              size=10)
 
     async def fetch(self, session, url):
+        """Async fetch single url."""
         async with session.get(url) as response:
             return await response.json()
 
     async def fetch_all(self, session, urls):
+        """Async fetch multiple urls."""
         tasks = []
         for url in urls:
             task = self.fetch(session, url)

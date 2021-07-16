@@ -83,6 +83,9 @@ def retrive_location(df, first_n: int):
     # it is hard to compare against different locations
     # solution: retrive geolocation
     loc = Location()
+    # there is an error with ST. street name
+    # we keep the mistake to illustrate data cleaning steps in notebook
+    # to correct it, replace with: "ST.", "ST", regex=False
     location = df["block"] + " " + df["street_name"]
     links = loc.url1 + location + loc.url2
     if first_n > 0:
