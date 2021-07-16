@@ -1,9 +1,0 @@
-README.md
-pyproject.toml
-setup.py
-src/hdb_resale_data/__init__.py
-src/hdb_resale_data/data.py
-src/hdb_resale_data.egg-info/PKG-INFO
-src/hdb_resale_data.egg-info/SOURCES.txt
-src/hdb_resale_data.egg-info/dependency_links.txt
-src/hdb_resale_data.egg-info/top_level.txt
