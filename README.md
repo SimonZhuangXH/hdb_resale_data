@@ -10,7 +10,8 @@ HDB resale data: from EDA to model prediction, for NUS Data and Social Science C
 We will be training data science skills using Singapore HDB resale data.
 The demonstrations here provides an example of the skills required in different data analysis steps.
 There might be smarter ways to improve the things we are doing here.
-Please feel free to explore new ideas and to build this project by adding suggestions to issues.
+Please feel free to explore new ideas and to build this project by adding suggestions to 
+[issues](https://github.com/lingjie00/hdb_resale_data/issues).
 
 Depending on the membership duration, we expect DSS members to complete the following checkpoints:
 
@@ -35,8 +36,8 @@ Please refer to [notebooks](notebooks) for interactive notebook examples.
 
 Please follow the following order:
 
-1. [EDA - Data profiling and cleaning](notebooks/1. EDA - Data profiling and cleaning.ipynb)
-2. [EDA - Data visualisation](notebooks/2. EDA - Data visualisation.ipynb)
+[1. EDA - Data profiling and cleaning](notebooks/1. EDA - Data profiling and cleaning.ipynb)
+[2. EDA - Data visualisation](notebooks/2. EDA - Data visualisation.ipynb)
 3. Model - Data preprocessing and model fitting pipeline (WIP)
 4. Model - Error analysis (WIP)
 5. EDA + Model - feature engineering with web scrapped data (WIP)
