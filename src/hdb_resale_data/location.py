@@ -1,34 +1,61 @@
 """Extract location data."""
 import grequests
 import requests
-import json
 import numpy as np
+import csv
+import asyncio
+from aiohttp import ClientSession
+
+
+def exception_handler(request, exception):
+    with open("failed_url.txt", "a") as f:
+        writer = csv.writer(f, delimiter=",")
+        writer.writerow([request.url])
 
 
 class Location(object):
 
     def __init__(self):
-        self.url1 = "https://developers.onemap.sg/commonapi/search?searchVal="
+        self.url1 = "https://developers.onemap.sg:443/commonapi/search?searchVal="  # noqa E501
         self.url2 = "&&returnGeom=Y&getAddrDetails=Y&pageNum=1"
 
     def get_response(self, link: str):
         """Takes in a link and return json response."""
-        page = requests.get(link)
+        page = requests.get(link, timeout=1)
         return page
 
     def json_load(self, response):
         """Takes in a response and return json format."""
-        page_decoded = response.content.decode("utf-8")
-        content = json.loads(page_decoded)
-        return content
+        return response.json()
 
     def get_gresponse(self, links: list):
         """Uses grequests for get_response."""
         locations = np.array(links)
         result = np.array(list(
-            map(lambda link: grequests.get(link), locations))
+            map(lambda link: grequests.get(link, timeout=1), locations))
         )
-        return grequests.map(result)
+        return grequests.map(result, exception_handler=exception_handler,
+                             size=10)
+
+    async def fetch(self, session, url):
+        """Async fetch single url."""
+        async with session.get(url) as response:
+            return await response.json()
+
+    async def fetch_all(self, session, urls):
+        """Async fetch multiple urls."""
+        tasks = []
+        for url in urls:
+            task = self.fetch(session, url)
+            tasks.append(task)
+        result = await asyncio.gather(*tasks)
+        return result
+
+    async def get_rresponse(self, links: list):
+        """Use async requests."""
+        async with ClientSession() as session:
+            responses = await self.fetch_all(session, links)
+            return responses
 
 
 def main():
@@ -55,6 +82,21 @@ def gmain():
     return content
 
 
+def rmain():
+    loc = Location()
+    locations = [
+        "406 ANG MO KIO AVE 10",
+        "108 ANG MO KIO AVE 4"
+    ]
+    for i, location in enumerate(locations):
+        locations[i] = loc.url1 + location + loc.url2
+    return asyncio.run(loc.get_rresponse(locations))
+
+
 if __name__ == "__main__":
     result = main()
+    print("result done")
     gresult = gmain()
+    print("gresult done")
+    rresult = rmain()
+    print("rresult done")
