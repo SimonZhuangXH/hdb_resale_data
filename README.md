@@ -36,8 +36,8 @@ Please refer to [notebooks](notebooks) for interactive notebook examples.
 
 Please follow the following order:
 
-[1. EDA - Data profiling and cleaning](notebooks/1.EDA-Data_profiling_and_cleaning.ipynb)
-[2. EDA - Data visualisation](notebooks/2.EDA-Data_visualisation.ipynb)
+1. [EDA - Data profiling and cleaning](notebooks/1.EDA-Data_profiling_and_cleaning.ipynb)
+2. [EDA - Data visualisation](notebooks/2.EDA-Data_visualisation.ipynb)
 3. Model - Data preprocessing and model fitting pipeline (WIP)
 4. Model - Error analysis (WIP)
 5. EDA + Model - feature engineering with web scrapped data (WIP)
